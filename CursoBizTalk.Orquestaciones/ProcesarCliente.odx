@@ -1,0 +1,419 @@
+﻿#if __DESIGNER_DATA
+#error Do not define __DESIGNER_DATA.
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<om:MetaModel MajorVersion="1" MinorVersion="3" Core="2b131234-7959-458d-834f-2dc0769ce683" ScheduleModel="66366196-361d-448d-976f-cab5e87496d2" xmlns:om="http://schemas.microsoft.com/BizTalk/2003/DesignerData">
+    <om:Element Type="Module" OID="5bd6a4a9-70cd-4cef-87fc-eed256d4bc16" LowerBound="1.1" HigherBound="102.1">
+        <om:Property Name="ReportToAnalyst" Value="True" />
+        <om:Property Name="Name" Value="CursoBizTalk.Orquestaciones" />
+        <om:Property Name="Signal" Value="False" />
+        <om:Element Type="ServiceDeclaration" OID="b3911797-985c-444f-bbc4-6adaaebca6c7" ParentLink="Module_ServiceDeclaration" LowerBound="29.1" HigherBound="101.1">
+            <om:Property Name="InitializedTransactionType" Value="False" />
+            <om:Property Name="IsInvokable" Value="False" />
+            <om:Property Name="TypeModifier" Value="Internal" />
+            <om:Property Name="ReportToAnalyst" Value="True" />
+            <om:Property Name="Name" Value="ProcesarCliente" />
+            <om:Property Name="Signal" Value="False" />
+            <om:Element Type="VariableDeclaration" OID="143543e5-0332-483e-8ddd-a388a8bb3aaf" ParentLink="ServiceDeclaration_VariableDeclaration" LowerBound="40.1" HigherBound="41.1">
+                <om:Property Name="UseDefaultConstructor" Value="False" />
+                <om:Property Name="Type" Value="System.Int32" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="TipoDocumento" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="VariableDeclaration" OID="2ce0e9e2-04d4-41a7-8a97-cb9815db03f9" ParentLink="ServiceDeclaration_VariableDeclaration" LowerBound="41.1" HigherBound="42.1">
+                <om:Property Name="UseDefaultConstructor" Value="True" />
+                <om:Property Name="Type" Value="System.Exception" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="Exception" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="MessageDeclaration" OID="c9ef900b-c5e5-4f77-8526-a181a0a52f66" ParentLink="ServiceDeclaration_MessageDeclaration" LowerBound="38.1" HigherBound="39.1">
+                <om:Property Name="Type" Value="CursoBizTalk.Esquemas.Cliente.Cliente" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="Cliente" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="MessageDeclaration" OID="5a6ff712-dbfb-4c3f-96eb-ccd9d62b578e" ParentLink="ServiceDeclaration_MessageDeclaration" LowerBound="39.1" HigherBound="40.1">
+                <om:Property Name="Type" Value="CursoBizTalk.Orquestaciones.ClienteSalida_MultipartType" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="ClienteSalida" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="ServiceBody" OID="50ab087d-63b1-436b-be5a-748a6237131a" ParentLink="ServiceDeclaration_ServiceBody">
+                <om:Property Name="Signal" Value="False" />
+                <om:Element Type="Receive" OID="6a6eec54-6700-43c0-952c-b702d90444d8" ParentLink="ServiceBody_Statement" LowerBound="44.1" HigherBound="47.1">
+                    <om:Property Name="Activate" Value="True" />
+                    <om:Property Name="PortName" Value="Port_Cliente" />
+                    <om:Property Name="MessageName" Value="Cliente" />
+                    <om:Property Name="OperationName" Value="Operation_1" />
+                    <om:Property Name="OperationMessageName" Value="Request" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="Rcv_Entrada" />
+                    <om:Property Name="Signal" Value="True" />
+                </om:Element>
+                <om:Element Type="VariableAssignment" OID="8b879fcd-ee2b-40b7-91f8-91826bea9791" ParentLink="ServiceBody_Statement" LowerBound="47.1" HigherBound="49.1">
+                    <om:Property Name="Expression" Value="TipoDocumento = Cliente(CursoBizTalk.Esquemas.Cliente.TipoIdentificacion);" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="ObtenerTipoDoc" />
+                    <om:Property Name="Signal" Value="True" />
+                </om:Element>
+                <om:Element Type="Construct" OID="7afa7240-c88d-45d7-910c-d13f6ce9930b" ParentLink="ServiceBody_Statement" LowerBound="49.1" HigherBound="57.1">
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="ConstructMessage_Salida" />
+                    <om:Property Name="Signal" Value="True" />
+                    <om:Element Type="Transform" OID="033968ba-d177-498e-bf4c-c7170da89dbe" ParentLink="ComplexStatement_Statement" LowerBound="52.1" HigherBound="54.1">
+                        <om:Property Name="ClassName" Value="CursoBizTalk.Mapas.Cliente.ClienteEntrada_ClienteSalida" />
+                        <om:Property Name="ReportToAnalyst" Value="True" />
+                        <om:Property Name="Name" Value="Transform_Salida" />
+                        <om:Property Name="Signal" Value="True" />
+                        <om:Element Type="MessagePartRef" OID="dff1f167-987b-4881-8c99-00c6b18e23ad" ParentLink="Transform_InputMessagePartRef" LowerBound="53.107" HigherBound="53.114">
+                            <om:Property Name="MessageRef" Value="Cliente" />
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="MessagePartReference_1" />
+                            <om:Property Name="Signal" Value="False" />
+                        </om:Element>
+                        <om:Element Type="MessagePartRef" OID="6c3abd93-b60f-453d-8d45-dd7fc50aa5c4" ParentLink="Transform_OutputMessagePartRef" LowerBound="53.28" HigherBound="53.46">
+                            <om:Property Name="MessageRef" Value="ClienteSalida" />
+                            <om:Property Name="PartRef" Value="Body" />
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="MessagePartReference_2" />
+                            <om:Property Name="Signal" Value="False" />
+                        </om:Element>
+                    </om:Element>
+                    <om:Element Type="MessageAssignment" OID="b0cd2352-520a-48b3-b2f5-6954d44f01dd" ParentLink="ComplexStatement_Statement" LowerBound="54.1" HigherBound="56.1">
+                        <om:Property Name="Expression" Value="ClienteSalida.Body.Identificacion.TipoCliente = CursoBizTalk.Utilidades.Utils.ObtenerTipoCliente(TipoDocumento);&#xD;&#xA;" />
+                        <om:Property Name="ReportToAnalyst" Value="False" />
+                        <om:Property Name="Name" Value="MessageAssignment_1" />
+                        <om:Property Name="Signal" Value="False" />
+                    </om:Element>
+                    <om:Element Type="MessageRef" OID="df9eafab-3a80-41f4-bf9a-1517ce1cff3e" ParentLink="Construct_MessageRef" LowerBound="50.23" HigherBound="50.36">
+                        <om:Property Name="Ref" Value="ClienteSalida" />
+                        <om:Property Name="ReportToAnalyst" Value="True" />
+                        <om:Property Name="Signal" Value="False" />
+                    </om:Element>
+                </om:Element>
+                <om:Element Type="Scope" OID="916bf6bb-f6b7-4ec3-9e01-4a93d905a84f" ParentLink="ServiceBody_Statement" LowerBound="57.1" HigherBound="99.1">
+                    <om:Property Name="InitializedTransactionType" Value="True" />
+                    <om:Property Name="IsSynchronized" Value="False" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="Scope_1" />
+                    <om:Property Name="Signal" Value="True" />
+                    <om:Element Type="Decision" OID="63c344c2-bc75-4080-90c0-106defcad16e" ParentLink="ComplexStatement_Statement" LowerBound="62.1" HigherBound="78.1">
+                        <om:Property Name="ReportToAnalyst" Value="True" />
+                        <om:Property Name="Name" Value="Decide_1" />
+                        <om:Property Name="Signal" Value="False" />
+                        <om:Element Type="DecisionBranch" OID="043e44c4-3c89-4b71-b9e1-1c681eaf1d3c" ParentLink="ReallyComplexStatement_Branch" LowerBound="63.21" HigherBound="68.1">
+                            <om:Property Name="Expression" Value="TipoDocumento == System.Int32.Parse(CursoBizTalk.Utilidades.SSOClientHelper.Read(&quot;CursoBizTalk&quot;,&quot;PJ&quot;))" />
+                            <om:Property Name="IsGhostBranch" Value="True" />
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="PJ" />
+                            <om:Property Name="Signal" Value="False" />
+                            <om:Element Type="Send" OID="74b39109-93a6-4750-8570-a5e52f43009a" ParentLink="ComplexStatement_Statement" LowerBound="65.1" HigherBound="67.1">
+                                <om:Property Name="PortName" Value="Port_PersonaJuridica" />
+                                <om:Property Name="MessageName" Value="ClienteSalida" />
+                                <om:Property Name="OperationName" Value="Operation_1" />
+                                <om:Property Name="OperationMessageName" Value="Request" />
+                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                <om:Property Name="Name" Value="Send_PJ" />
+                                <om:Property Name="Signal" Value="True" />
+                            </om:Element>
+                        </om:Element>
+                        <om:Element Type="DecisionBranch" OID="0688a8cc-34f7-4124-880f-f4bf0122dadc" ParentLink="ReallyComplexStatement_Branch" LowerBound="68.26" HigherBound="73.1">
+                            <om:Property Name="Expression" Value="TipoDocumento == System.Int32.Parse(CursoBizTalk.Utilidades.SSOClientHelper.Read(&quot;CursoBizTalk&quot;,&quot;PN&quot;))" />
+                            <om:Property Name="IsGhostBranch" Value="True" />
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="Rule_1" />
+                            <om:Property Name="Signal" Value="True" />
+                            <om:Element Type="Send" OID="35e8bf04-a2a5-44fb-ae78-506f50c52c39" ParentLink="ComplexStatement_Statement" LowerBound="70.1" HigherBound="72.1">
+                                <om:Property Name="PortName" Value="Port_Salida" />
+                                <om:Property Name="MessageName" Value="ClienteSalida" />
+                                <om:Property Name="OperationName" Value="Operation_1" />
+                                <om:Property Name="OperationMessageName" Value="Request" />
+                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                <om:Property Name="Name" Value="Rcv_Salida" />
+                                <om:Property Name="Signal" Value="True" />
+                            </om:Element>
+                        </om:Element>
+                        <om:Element Type="DecisionBranch" OID="44e06e0e-da38-4831-b897-c73a19510583" ParentLink="ReallyComplexStatement_Branch">
+                            <om:Property Name="IsGhostBranch" Value="True" />
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="Else" />
+                            <om:Property Name="Signal" Value="False" />
+                            <om:Element Type="VariableAssignment" OID="95e0208e-8885-4847-b97a-a303bdca9b2b" ParentLink="ComplexStatement_Statement" LowerBound="75.1" HigherBound="77.1">
+                                <om:Property Name="Expression" Value="throw new CursoBizTalk.Utilidades.CursoBTSException(System.Convert.ToInt16(CursoBizTalk.Utilidades.SSOClientHelper.Read(&quot;CursoBizTalk&quot;,&quot;ErrorCode&quot;)),CursoBizTalk.Utilidades.SSOClientHelper.Read(&quot;CursoBizTalk&quot;,&quot;ErrorDescription&quot;));" />
+                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                <om:Property Name="Name" Value="Expression_1" />
+                                <om:Property Name="Signal" Value="False" />
+                            </om:Element>
+                        </om:Element>
+                    </om:Element>
+                    <om:Element Type="Catch" OID="36b386d6-f7ed-4969-a4a6-7377084746e4" ParentLink="Scope_Catch" LowerBound="81.1" HigherBound="89.1">
+                        <om:Property Name="ExceptionName" Value="ex" />
+                        <om:Property Name="ExceptionType" Value="CursoBizTalk.Utilidades.CursoBTSException" />
+                        <om:Property Name="IsFaultMessage" Value="False" />
+                        <om:Property Name="ReportToAnalyst" Value="True" />
+                        <om:Property Name="Name" Value="Ex_Negocio" />
+                        <om:Property Name="Signal" Value="True" />
+                        <om:Element Type="VariableAssignment" OID="a4a830bc-bd67-4d91-bfdd-f2c49299adfd" ParentLink="Catch_Statement" LowerBound="84.1" HigherBound="86.1">
+                            <om:Property Name="Expression" Value="CursoBizTalk.Utilidades.Utils.WriteLog(CursoBizTalk.Utilidades.Utils.CreateErrorMessage(ex.CodigoError,ex.MensajeError));" />
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="Error_Negocio" />
+                            <om:Property Name="Signal" Value="False" />
+                        </om:Element>
+                        <om:Element Type="Terminate" OID="d3d48788-bee9-46dd-9367-cc55dfc7e2a7" ParentLink="Catch_Statement" LowerBound="86.1" HigherBound="88.1">
+                            <om:Property Name="ErrorMessage" Value="&quot;Se ha generado una excepcion de negocio&quot;;" />
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="Terminate_2" />
+                            <om:Property Name="Signal" Value="True" />
+                        </om:Element>
+                    </om:Element>
+                    <om:Element Type="Catch" OID="7e5550b6-d195-420b-b557-8766dafb890b" ParentLink="Scope_Catch" LowerBound="89.1" HigherBound="97.1">
+                        <om:Property Name="ExceptionName" Value="ex" />
+                        <om:Property Name="ExceptionType" Value="System.Exception" />
+                        <om:Property Name="IsFaultMessage" Value="False" />
+                        <om:Property Name="ReportToAnalyst" Value="True" />
+                        <om:Property Name="Name" Value="ex_General" />
+                        <om:Property Name="Signal" Value="True" />
+                        <om:Element Type="VariableAssignment" OID="3aeacffc-9e7f-4b9c-b54a-0cf0d89758df" ParentLink="Catch_Statement" LowerBound="92.1" HigherBound="94.1">
+                            <om:Property Name="Expression" Value="CursoBizTalk.Utilidades.Utils.WriteLog(&quot;se fue por exception: &quot;+ex.ToString());" />
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="Error_Generico" />
+                            <om:Property Name="Signal" Value="True" />
+                        </om:Element>
+                        <om:Element Type="Terminate" OID="77d08897-4420-49e0-92ea-7d0a609bb3de" ParentLink="Catch_Statement" LowerBound="94.1" HigherBound="96.1">
+                            <om:Property Name="ErrorMessage" Value="&quot;Orquestacion Terminada por Exception Generica&quot;;" />
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="Terminate_1" />
+                            <om:Property Name="Signal" Value="False" />
+                        </om:Element>
+                    </om:Element>
+                </om:Element>
+            </om:Element>
+            <om:Element Type="PortDeclaration" OID="dd218815-3a29-4ba0-80a1-6bb707e3d969" ParentLink="ServiceDeclaration_PortDeclaration" LowerBound="32.1" HigherBound="34.1">
+                <om:Property Name="PortModifier" Value="Implements" />
+                <om:Property Name="Orientation" Value="Left" />
+                <om:Property Name="PortIndex" Value="-1" />
+                <om:Property Name="IsWebPort" Value="False" />
+                <om:Property Name="OrderedDelivery" Value="False" />
+                <om:Property Name="DeliveryNotification" Value="None" />
+                <om:Property Name="Type" Value="CursoBizTalk.Orquestaciones.PortType_Cliente" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="Port_Cliente" />
+                <om:Property Name="Signal" Value="False" />
+                <om:Element Type="LogicalBindingAttribute" OID="4da8a3dc-4860-4fdb-a467-3f3a3bdd1de4" ParentLink="PortDeclaration_CLRAttribute" LowerBound="32.1" HigherBound="33.1">
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+            <om:Element Type="PortDeclaration" OID="75604d8e-0ff3-4d13-8168-26618018d281" ParentLink="ServiceDeclaration_PortDeclaration" LowerBound="34.1" HigherBound="36.1">
+                <om:Property Name="PortModifier" Value="Uses" />
+                <om:Property Name="Orientation" Value="Left" />
+                <om:Property Name="PortIndex" Value="19" />
+                <om:Property Name="IsWebPort" Value="False" />
+                <om:Property Name="OrderedDelivery" Value="False" />
+                <om:Property Name="DeliveryNotification" Value="None" />
+                <om:Property Name="Type" Value="CursoBizTalk.Orquestaciones.PortType_PJ" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="Port_PersonaJuridica" />
+                <om:Property Name="Signal" Value="False" />
+                <om:Element Type="LogicalBindingAttribute" OID="a4e78513-a6fd-4658-a133-49000304622b" ParentLink="PortDeclaration_CLRAttribute" LowerBound="34.1" HigherBound="35.1">
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+            <om:Element Type="PortDeclaration" OID="a0335f03-7f9f-484c-a8cd-251f7cca653b" ParentLink="ServiceDeclaration_PortDeclaration" LowerBound="36.1" HigherBound="38.1">
+                <om:Property Name="PortModifier" Value="Uses" />
+                <om:Property Name="Orientation" Value="Right" />
+                <om:Property Name="PortIndex" Value="20" />
+                <om:Property Name="IsWebPort" Value="False" />
+                <om:Property Name="OrderedDelivery" Value="False" />
+                <om:Property Name="DeliveryNotification" Value="None" />
+                <om:Property Name="Type" Value="CursoBizTalk.Orquestaciones.PortType_Salida" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="Port_Salida" />
+                <om:Property Name="Signal" Value="False" />
+                <om:Element Type="LogicalBindingAttribute" OID="d3677fcd-164b-4085-b0e0-78fff8cbf831" ParentLink="PortDeclaration_CLRAttribute" LowerBound="36.1" HigherBound="37.1">
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+        </om:Element>
+        <om:Element Type="PortType" OID="05826f8b-bb11-415d-a6d6-944b3df6ed42" ParentLink="Module_PortType" LowerBound="8.1" HigherBound="15.1">
+            <om:Property Name="Synchronous" Value="False" />
+            <om:Property Name="TypeModifier" Value="Internal" />
+            <om:Property Name="ReportToAnalyst" Value="True" />
+            <om:Property Name="Name" Value="PortType_Cliente" />
+            <om:Property Name="Signal" Value="False" />
+            <om:Element Type="OperationDeclaration" OID="3536aa9f-5447-402b-bc41-98f9e6f4a312" ParentLink="PortType_OperationDeclaration" LowerBound="10.1" HigherBound="14.1">
+                <om:Property Name="OperationType" Value="OneWay" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="Operation_1" />
+                <om:Property Name="Signal" Value="False" />
+                <om:Element Type="MessageRef" OID="1fa0f27d-3b77-4958-b57d-d2e38460ec4a" ParentLink="OperationDeclaration_RequestMessageRef" LowerBound="12.13" HigherBound="12.50">
+                    <om:Property Name="Ref" Value="CursoBizTalk.Esquemas.Cliente.Cliente" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="Request" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+        </om:Element>
+        <om:Element Type="PortType" OID="7d0995f1-d774-45de-9ac2-aa6da34eda5e" ParentLink="Module_PortType" LowerBound="15.1" HigherBound="22.1">
+            <om:Property Name="Synchronous" Value="False" />
+            <om:Property Name="TypeModifier" Value="Internal" />
+            <om:Property Name="ReportToAnalyst" Value="True" />
+            <om:Property Name="Name" Value="PortType_Salida" />
+            <om:Property Name="Signal" Value="False" />
+            <om:Element Type="OperationDeclaration" OID="cdb561ee-adcf-4435-a0ed-8a9fb9b83bd9" ParentLink="PortType_OperationDeclaration" LowerBound="17.1" HigherBound="21.1">
+                <om:Property Name="OperationType" Value="OneWay" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="Operation_1" />
+                <om:Property Name="Signal" Value="False" />
+                <om:Element Type="MessageRef" OID="eac795c0-005c-4ba2-9e36-820ac521ea55" ParentLink="OperationDeclaration_RequestMessageRef" LowerBound="19.13" HigherBound="19.40">
+                    <om:Property Name="Ref" Value="CursoBizTalk.Orquestaciones.ClienteSalida_MultipartType" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="Request" />
+                    <om:Property Name="Signal" Value="True" />
+                </om:Element>
+            </om:Element>
+        </om:Element>
+        <om:Element Type="PortType" OID="276a7e06-16b8-409b-896f-9f5bc7c2e6e2" ParentLink="Module_PortType" LowerBound="22.1" HigherBound="29.1">
+            <om:Property Name="Synchronous" Value="False" />
+            <om:Property Name="TypeModifier" Value="Internal" />
+            <om:Property Name="ReportToAnalyst" Value="True" />
+            <om:Property Name="Name" Value="PortType_PJ" />
+            <om:Property Name="Signal" Value="False" />
+            <om:Element Type="OperationDeclaration" OID="149a0ab2-a591-4761-9dd1-3bca1383f7f5" ParentLink="PortType_OperationDeclaration" LowerBound="24.1" HigherBound="28.1">
+                <om:Property Name="OperationType" Value="OneWay" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="Operation_1" />
+                <om:Property Name="Signal" Value="False" />
+                <om:Element Type="MessageRef" OID="24917fde-1e3b-4cc0-888d-fd892900ef98" ParentLink="OperationDeclaration_RequestMessageRef" LowerBound="26.13" HigherBound="26.40">
+                    <om:Property Name="Ref" Value="CursoBizTalk.Orquestaciones.ClienteSalida_MultipartType" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="Request" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+        </om:Element>
+        <om:Element Type="MultipartMessageType" OID="a846171a-3827-4964-9671-0c00fc5d414f" ParentLink="Module_MessageType" LowerBound="4.1" HigherBound="8.1">
+            <om:Property Name="TypeModifier" Value="Internal" />
+            <om:Property Name="ReportToAnalyst" Value="True" />
+            <om:Property Name="Name" Value="ClienteSalida_MultipartType" />
+            <om:Property Name="Signal" Value="True" />
+            <om:Element Type="PartDeclaration" OID="db998028-5014-4e55-81f7-297c3d846cdb" ParentLink="MultipartMessageType_PartDeclaration" LowerBound="6.1" HigherBound="7.1">
+                <om:Property Name="ClassName" Value="CursoBizTalk.Esquemas.Cliente.ClienteSalida" />
+                <om:Property Name="IsBodyPart" Value="True" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="Body" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+        </om:Element>
+    </om:Element>
+</om:MetaModel>
+#endif // __DESIGNER_DATA
+[Microsoft.XLANGs.BaseTypes.BPELExportable(false)]
+module CursoBizTalk.Orquestaciones
+{
+    internal messagetype ClienteSalida_MultipartType
+    {
+        body CursoBizTalk.Esquemas.Cliente.ClienteSalida Body;
+    };
+    internal porttype PortType_Cliente
+    {
+        oneway Operation_1
+        {
+            CursoBizTalk.Esquemas.Cliente.Cliente
+        };
+    };
+    internal porttype PortType_Salida
+    {
+        oneway Operation_1
+        {
+            ClienteSalida_MultipartType
+        };
+    };
+    internal porttype PortType_PJ
+    {
+        oneway Operation_1
+        {
+            ClienteSalida_MultipartType
+        };
+    };
+    [Microsoft.XLANGs.BaseTypes.BPELExportable(false)]
+    internal service ProcesarCliente
+    {
+        [Microsoft.XLANGs.BaseTypes.LogicalBinding()]
+        port implements PortType_Cliente Port_Cliente;
+        [Microsoft.XLANGs.BaseTypes.LogicalBinding()]
+        port uses PortType_PJ Port_PersonaJuridica;
+        [Microsoft.XLANGs.BaseTypes.LogicalBinding()]
+        port uses PortType_Salida Port_Salida;
+        message CursoBizTalk.Esquemas.Cliente.Cliente Cliente;
+        message ClienteSalida_MultipartType ClienteSalida;
+        System.Int32 TipoDocumento;
+        System.Exception Exception;
+        body ()
+        {
+            [Microsoft.XLANGs.BaseTypes.DesignerPosition("6a6eec54-6700-43c0-952c-b702d90444d8")]
+            activate receive (Port_Cliente.Operation_1, Cliente);
+            Exception = new System.Exception();
+            [Microsoft.XLANGs.BaseTypes.DesignerPosition("8b879fcd-ee2b-40b7-91f8-91826bea9791")]
+            TipoDocumento = Cliente(CursoBizTalk.Esquemas.Cliente.TipoIdentificacion);
+            [Microsoft.XLANGs.BaseTypes.DesignerPosition("7afa7240-c88d-45d7-910c-d13f6ce9930b")]
+            construct ClienteSalida
+            {
+                [Microsoft.XLANGs.BaseTypes.DesignerPosition("033968ba-d177-498e-bf4c-c7170da89dbe")]
+                transform (ClienteSalida.Body) = CursoBizTalk.Mapas.Cliente.ClienteEntrada_ClienteSalida (Cliente);
+                [Microsoft.XLANGs.BaseTypes.DesignerPosition("b0cd2352-520a-48b3-b2f5-6954d44f01dd")]
+                ClienteSalida.Body.Identificacion.TipoCliente = CursoBizTalk.Utilidades.Utils.ObtenerTipoCliente(TipoDocumento);
+            }
+            [Microsoft.XLANGs.BaseTypes.DesignerPosition("916bf6bb-f6b7-4ec3-9e01-4a93d905a84f")]
+            scope
+            {
+                body
+                {
+                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("63c344c2-bc75-4080-90c0-106defcad16e")]
+                    if (TipoDocumento == System.Int32.Parse(CursoBizTalk.Utilidades.SSOClientHelper.Read("CursoBizTalk","PJ")))
+                    {
+                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("74b39109-93a6-4750-8570-a5e52f43009a")]
+                        send (Port_PersonaJuridica.Operation_1, ClienteSalida);
+                    }
+                    else if (TipoDocumento == System.Int32.Parse(CursoBizTalk.Utilidades.SSOClientHelper.Read("CursoBizTalk","PN")))
+                    {
+                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("35e8bf04-a2a5-44fb-ae78-506f50c52c39")]
+                        send (Port_Salida.Operation_1, ClienteSalida);
+                    }
+                    else 
+                    {
+                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("95e0208e-8885-4847-b97a-a303bdca9b2b")]
+                        throw new CursoBizTalk.Utilidades.CursoBTSException(System.Convert.ToInt16(CursoBizTalk.Utilidades.SSOClientHelper.Read("CursoBizTalk","ErrorCode")),CursoBizTalk.Utilidades.SSOClientHelper.Read("CursoBizTalk","ErrorDescription"));
+                    }
+                }
+                exceptions
+                {
+                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("36b386d6-f7ed-4969-a4a6-7377084746e4")]
+                    catch (CursoBizTalk.Utilidades.CursoBTSException ex)
+                    {
+                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("a4a830bc-bd67-4d91-bfdd-f2c49299adfd")]
+                        CursoBizTalk.Utilidades.Utils.WriteLog(CursoBizTalk.Utilidades.Utils.CreateErrorMessage(ex.CodigoError,ex.MensajeError));
+                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("d3d48788-bee9-46dd-9367-cc55dfc7e2a7")]
+                        terminate "Se ha generado una excepcion de negocio";;
+                    }
+                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("7e5550b6-d195-420b-b557-8766dafb890b")]
+                    catch (System.Exception ex)
+                    {
+                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("3aeacffc-9e7f-4b9c-b54a-0cf0d89758df")]
+                        CursoBizTalk.Utilidades.Utils.WriteLog("se fue por exception: "+ex.ToString());
+                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("77d08897-4420-49e0-92ea-7d0a609bb3de")]
+                        terminate "Orquestacion Terminada por Exception Generica";;
+                    }
+                }
+            }
+        }
+    }
+}
+
