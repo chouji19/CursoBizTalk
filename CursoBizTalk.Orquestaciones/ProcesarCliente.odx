@@ -70,17 +70,17 @@
                         <om:Property Name="ReportToAnalyst" Value="True" />
                         <om:Property Name="Name" Value="Transform_Salida" />
                         <om:Property Name="Signal" Value="True" />
-                        <om:Element Type="MessagePartRef" OID="dff1f167-987b-4881-8c99-00c6b18e23ad" ParentLink="Transform_InputMessagePartRef" LowerBound="53.107" HigherBound="53.114">
-                            <om:Property Name="MessageRef" Value="Cliente" />
-                            <om:Property Name="ReportToAnalyst" Value="True" />
-                            <om:Property Name="Name" Value="MessagePartReference_1" />
-                            <om:Property Name="Signal" Value="False" />
-                        </om:Element>
                         <om:Element Type="MessagePartRef" OID="6c3abd93-b60f-453d-8d45-dd7fc50aa5c4" ParentLink="Transform_OutputMessagePartRef" LowerBound="53.28" HigherBound="53.46">
                             <om:Property Name="MessageRef" Value="ClienteSalida" />
                             <om:Property Name="PartRef" Value="Body" />
                             <om:Property Name="ReportToAnalyst" Value="True" />
                             <om:Property Name="Name" Value="MessagePartReference_2" />
+                            <om:Property Name="Signal" Value="False" />
+                        </om:Element>
+                        <om:Element Type="MessagePartRef" OID="dff1f167-987b-4881-8c99-00c6b18e23ad" ParentLink="Transform_InputMessagePartRef" LowerBound="53.107" HigherBound="53.114">
+                            <om:Property Name="MessageRef" Value="Cliente" />
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="MessagePartReference_1" />
                             <om:Property Name="Signal" Value="False" />
                         </om:Element>
                     </om:Element>
@@ -96,7 +96,7 @@
                         <om:Property Name="Signal" Value="False" />
                     </om:Element>
                 </om:Element>
-                <om:Element Type="Scope" OID="916bf6bb-f6b7-4ec3-9e01-4a93d905a84f" ParentLink="ServiceBody_Statement" LowerBound="57.1" HigherBound="99.1">
+                <om:Element Type="Scope" OID="7004715b-4a58-4983-b6dc-0d52b394a2ac" ParentLink="ServiceBody_Statement" LowerBound="57.1" HigherBound="99.1">
                     <om:Property Name="InitializedTransactionType" Value="True" />
                     <om:Property Name="IsSynchronized" Value="False" />
                     <om:Property Name="ReportToAnalyst" Value="True" />
@@ -122,12 +122,12 @@
                                 <om:Property Name="Signal" Value="True" />
                             </om:Element>
                         </om:Element>
-                        <om:Element Type="DecisionBranch" OID="0688a8cc-34f7-4124-880f-f4bf0122dadc" ParentLink="ReallyComplexStatement_Branch" LowerBound="68.26" HigherBound="73.1">
+                        <om:Element Type="DecisionBranch" OID="41c64dd2-6edd-4e22-9464-2a226447323f" ParentLink="ReallyComplexStatement_Branch" LowerBound="68.26" HigherBound="73.1">
                             <om:Property Name="Expression" Value="TipoDocumento == System.Int32.Parse(CursoBizTalk.Utilidades.SSOClientHelper.Read(&quot;CursoBizTalk&quot;,&quot;PN&quot;))" />
                             <om:Property Name="IsGhostBranch" Value="True" />
                             <om:Property Name="ReportToAnalyst" Value="True" />
-                            <om:Property Name="Name" Value="Rule_1" />
-                            <om:Property Name="Signal" Value="True" />
+                            <om:Property Name="Name" Value="PN" />
+                            <om:Property Name="Signal" Value="False" />
                             <om:Element Type="Send" OID="35e8bf04-a2a5-44fb-ae78-506f50c52c39" ParentLink="ComplexStatement_Statement" LowerBound="70.1" HigherBound="72.1">
                                 <om:Property Name="PortName" Value="Port_Salida" />
                                 <om:Property Name="MessageName" Value="ClienteSalida" />
@@ -143,52 +143,52 @@
                             <om:Property Name="ReportToAnalyst" Value="True" />
                             <om:Property Name="Name" Value="Else" />
                             <om:Property Name="Signal" Value="False" />
-                            <om:Element Type="VariableAssignment" OID="95e0208e-8885-4847-b97a-a303bdca9b2b" ParentLink="ComplexStatement_Statement" LowerBound="75.1" HigherBound="77.1">
-                                <om:Property Name="Expression" Value="throw new CursoBizTalk.Utilidades.CursoBTSException(System.Convert.ToInt16(CursoBizTalk.Utilidades.SSOClientHelper.Read(&quot;CursoBizTalk&quot;,&quot;ErrorCode&quot;)),CursoBizTalk.Utilidades.SSOClientHelper.Read(&quot;CursoBizTalk&quot;,&quot;ErrorDescription&quot;));" />
+                            <om:Element Type="VariableAssignment" OID="61e15fad-98dc-45cc-b0cc-ba1d788cb33b" ParentLink="ComplexStatement_Statement" LowerBound="75.1" HigherBound="77.1">
+                                <om:Property Name="Expression" Value="throw new CursoBizTalk.Utilidades.CustomException(&quot;001&quot;,&quot;Tipo de documento no es valido&quot;);" />
                                 <om:Property Name="ReportToAnalyst" Value="True" />
-                                <om:Property Name="Name" Value="Expression_1" />
-                                <om:Property Name="Signal" Value="False" />
+                                <om:Property Name="Name" Value="ErrorTD" />
+                                <om:Property Name="Signal" Value="True" />
                             </om:Element>
                         </om:Element>
                     </om:Element>
-                    <om:Element Type="Catch" OID="36b386d6-f7ed-4969-a4a6-7377084746e4" ParentLink="Scope_Catch" LowerBound="81.1" HigherBound="89.1">
-                        <om:Property Name="ExceptionName" Value="ex" />
-                        <om:Property Name="ExceptionType" Value="CursoBizTalk.Utilidades.CursoBTSException" />
-                        <om:Property Name="IsFaultMessage" Value="False" />
-                        <om:Property Name="ReportToAnalyst" Value="True" />
-                        <om:Property Name="Name" Value="Ex_Negocio" />
-                        <om:Property Name="Signal" Value="True" />
-                        <om:Element Type="VariableAssignment" OID="a4a830bc-bd67-4d91-bfdd-f2c49299adfd" ParentLink="Catch_Statement" LowerBound="84.1" HigherBound="86.1">
-                            <om:Property Name="Expression" Value="CursoBizTalk.Utilidades.Utils.WriteLog(CursoBizTalk.Utilidades.Utils.CreateErrorMessage(ex.CodigoError,ex.MensajeError));" />
-                            <om:Property Name="ReportToAnalyst" Value="True" />
-                            <om:Property Name="Name" Value="Error_Negocio" />
-                            <om:Property Name="Signal" Value="False" />
-                        </om:Element>
-                        <om:Element Type="Terminate" OID="d3d48788-bee9-46dd-9367-cc55dfc7e2a7" ParentLink="Catch_Statement" LowerBound="86.1" HigherBound="88.1">
-                            <om:Property Name="ErrorMessage" Value="&quot;Se ha generado una excepcion de negocio&quot;;" />
-                            <om:Property Name="ReportToAnalyst" Value="True" />
-                            <om:Property Name="Name" Value="Terminate_2" />
-                            <om:Property Name="Signal" Value="True" />
-                        </om:Element>
-                    </om:Element>
-                    <om:Element Type="Catch" OID="7e5550b6-d195-420b-b557-8766dafb890b" ParentLink="Scope_Catch" LowerBound="89.1" HigherBound="97.1">
+                    <om:Element Type="Catch" OID="c0645c55-2833-49ed-9c26-d71fb8d29d40" ParentLink="Scope_Catch" LowerBound="81.1" HigherBound="89.1">
                         <om:Property Name="ExceptionName" Value="ex" />
                         <om:Property Name="ExceptionType" Value="System.Exception" />
                         <om:Property Name="IsFaultMessage" Value="False" />
                         <om:Property Name="ReportToAnalyst" Value="True" />
-                        <om:Property Name="Name" Value="ex_General" />
+                        <om:Property Name="Name" Value="CatchException_1" />
                         <om:Property Name="Signal" Value="True" />
-                        <om:Element Type="VariableAssignment" OID="3aeacffc-9e7f-4b9c-b54a-0cf0d89758df" ParentLink="Catch_Statement" LowerBound="92.1" HigherBound="94.1">
-                            <om:Property Name="Expression" Value="CursoBizTalk.Utilidades.Utils.WriteLog(&quot;se fue por exception: &quot;+ex.ToString());" />
+                        <om:Element Type="VariableAssignment" OID="68e49c6c-e33c-4ed9-9620-4d7f04cea6d4" ParentLink="Catch_Statement" LowerBound="84.1" HigherBound="86.1">
+                            <om:Property Name="Expression" Value="CursoBizTalk.Utilidades.Utils.WriteLog(&quot;Ocurrio un error procesando la orquestacion &quot;+ex.ToString());" />
                             <om:Property Name="ReportToAnalyst" Value="True" />
-                            <om:Property Name="Name" Value="Error_Generico" />
-                            <om:Property Name="Signal" Value="True" />
+                            <om:Property Name="Name" Value="Expression_1" />
+                            <om:Property Name="Signal" Value="False" />
                         </om:Element>
-                        <om:Element Type="Terminate" OID="77d08897-4420-49e0-92ea-7d0a609bb3de" ParentLink="Catch_Statement" LowerBound="94.1" HigherBound="96.1">
-                            <om:Property Name="ErrorMessage" Value="&quot;Orquestacion Terminada por Exception Generica&quot;;" />
+                        <om:Element Type="Terminate" OID="deb05b59-75c5-4b07-a81e-9d47e9859b38" ParentLink="Catch_Statement" LowerBound="86.1" HigherBound="88.1">
+                            <om:Property Name="ErrorMessage" Value="&quot;Orquestacion Terminada&quot;;" />
                             <om:Property Name="ReportToAnalyst" Value="True" />
                             <om:Property Name="Name" Value="Terminate_1" />
-                            <om:Property Name="Signal" Value="False" />
+                            <om:Property Name="Signal" Value="True" />
+                        </om:Element>
+                    </om:Element>
+                    <om:Element Type="Catch" OID="7e4af519-da55-49b7-a030-89952a46d55b" ParentLink="Scope_Catch" LowerBound="89.1" HigherBound="97.1">
+                        <om:Property Name="ExceptionName" Value="ex" />
+                        <om:Property Name="ExceptionType" Value="CursoBizTalk.Utilidades.CustomException" />
+                        <om:Property Name="IsFaultMessage" Value="False" />
+                        <om:Property Name="ReportToAnalyst" Value="True" />
+                        <om:Property Name="Name" Value="CatchException_2" />
+                        <om:Property Name="Signal" Value="True" />
+                        <om:Element Type="VariableAssignment" OID="bef0cd3d-08d8-45cb-a01e-fdf65ecb3809" ParentLink="Catch_Statement" LowerBound="92.1" HigherBound="94.1">
+                            <om:Property Name="Expression" Value="CursoBizTalk.Utilidades.Utils.WriteLog(&quot;Error de negocio codigo&quot;+ex.CodigoError + &quot; Mensaje: &quot;+ ex.Mensaje);" />
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="Expression_2" />
+                            <om:Property Name="Signal" Value="True" />
+                        </om:Element>
+                        <om:Element Type="Suspend" OID="bb71b301-11ef-4c40-9fae-51ea37e2b2a8" ParentLink="Catch_Statement" LowerBound="94.1" HigherBound="96.1">
+                            <om:Property Name="ErrorMessage" Value="&quot;ORquestacion suspendida por error en tipo de documento&quot;;" />
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="Suspend_1" />
+                            <om:Property Name="Signal" Value="True" />
                         </om:Element>
                     </om:Element>
                 </om:Element>
@@ -371,7 +371,7 @@ module CursoBizTalk.Orquestaciones
                 [Microsoft.XLANGs.BaseTypes.DesignerPosition("b0cd2352-520a-48b3-b2f5-6954d44f01dd")]
                 ClienteSalida.Body.Identificacion.TipoCliente = CursoBizTalk.Utilidades.Utils.ObtenerTipoCliente(TipoDocumento);
             }
-            [Microsoft.XLANGs.BaseTypes.DesignerPosition("916bf6bb-f6b7-4ec3-9e01-4a93d905a84f")]
+            [Microsoft.XLANGs.BaseTypes.DesignerPosition("7004715b-4a58-4983-b6dc-0d52b394a2ac")]
             scope
             {
                 body
@@ -389,27 +389,27 @@ module CursoBizTalk.Orquestaciones
                     }
                     else 
                     {
-                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("95e0208e-8885-4847-b97a-a303bdca9b2b")]
-                        throw new CursoBizTalk.Utilidades.CursoBTSException(System.Convert.ToInt16(CursoBizTalk.Utilidades.SSOClientHelper.Read("CursoBizTalk","ErrorCode")),CursoBizTalk.Utilidades.SSOClientHelper.Read("CursoBizTalk","ErrorDescription"));
+                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("61e15fad-98dc-45cc-b0cc-ba1d788cb33b")]
+                        throw new CursoBizTalk.Utilidades.CustomException("001","Tipo de documento no es valido");
                     }
                 }
                 exceptions
                 {
-                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("36b386d6-f7ed-4969-a4a6-7377084746e4")]
-                    catch (CursoBizTalk.Utilidades.CursoBTSException ex)
-                    {
-                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("a4a830bc-bd67-4d91-bfdd-f2c49299adfd")]
-                        CursoBizTalk.Utilidades.Utils.WriteLog(CursoBizTalk.Utilidades.Utils.CreateErrorMessage(ex.CodigoError,ex.MensajeError));
-                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("d3d48788-bee9-46dd-9367-cc55dfc7e2a7")]
-                        terminate "Se ha generado una excepcion de negocio";;
-                    }
-                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("7e5550b6-d195-420b-b557-8766dafb890b")]
+                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("c0645c55-2833-49ed-9c26-d71fb8d29d40")]
                     catch (System.Exception ex)
                     {
-                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("3aeacffc-9e7f-4b9c-b54a-0cf0d89758df")]
-                        CursoBizTalk.Utilidades.Utils.WriteLog("se fue por exception: "+ex.ToString());
-                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("77d08897-4420-49e0-92ea-7d0a609bb3de")]
-                        terminate "Orquestacion Terminada por Exception Generica";;
+                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("68e49c6c-e33c-4ed9-9620-4d7f04cea6d4")]
+                        CursoBizTalk.Utilidades.Utils.WriteLog("Ocurrio un error procesando la orquestacion "+ex.ToString());
+                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("deb05b59-75c5-4b07-a81e-9d47e9859b38")]
+                        terminate "Orquestacion Terminada";;
+                    }
+                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("7e4af519-da55-49b7-a030-89952a46d55b")]
+                    catch (CursoBizTalk.Utilidades.CustomException ex)
+                    {
+                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("bef0cd3d-08d8-45cb-a01e-fdf65ecb3809")]
+                        CursoBizTalk.Utilidades.Utils.WriteLog("Error de negocio codigo"+ex.CodigoError + " Mensaje: "+ ex.Mensaje);
+                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("bb71b301-11ef-4c40-9fae-51ea37e2b2a8")]
+                        suspend "ORquestacion suspendida por error en tipo de documento";
                     }
                 }
             }

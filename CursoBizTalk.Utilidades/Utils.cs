@@ -42,14 +42,10 @@ namespace CursoBizTalk.Utilidades
             }
             systemEventLog.Source = source;
             systemEventLog.WriteEntry(text, EventLogEntryType.Information, 150);
-
         }
 
 
-        public static string CreateErrorMessage(int code, string Message)
-        {
-            return $"Se presento un error con código: {code} \n mensaje del error: {Message}";
-        }
+        
     }
 
 }
